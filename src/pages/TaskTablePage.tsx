@@ -7,12 +7,15 @@ import {
   Table,
   ActionIcon,
   Checkbox,
+  Badge,
 } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { useState } from "react";
 import dayjs from "dayjs";
 import AddTaskModal from "../components/AddTaskModal";
 import { useTaskStore } from "../store/TaskItemStore";
+
+
 
 export default function TodoTablePage() {
   const { tasks, addTask, toggleTask, removeTask } = useTaskStore();
@@ -43,6 +46,9 @@ export default function TodoTablePage() {
         </ActionIcon>
       </Table.Td>
       {/* เพิ่ม row assignees ตรงนี้*/}
+      {task.assignees.map((uSers)=>
+        <Badge variant="light" color="blue">{uSers}</Badge>
+      )}
     </Table.Tr>
   ));
 
@@ -64,13 +70,14 @@ export default function TodoTablePage() {
         <Table striped highlightOnHover horizontalSpacing="xl">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Title</Table.Th>
-              <Table.Th>Description</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Due Date</Table.Th>
-              <Table.Th>Completed</Table.Th>
-              <Table.Th>Actions</Table.Th>
+              <Table.Th style={{ width: "200px" }}>Title</Table.Th>
+              <Table.Th style={{ width: "300px" }}>Description</Table.Th>
+              <Table.Th style={{ width: "100px" }}>Status</Table.Th>
+              <Table.Th style={{ width: "50px" }}>Due Date</Table.Th>
+              <Table.Th style={{ width: "150px" }}>Completed</Table.Th>
+              <Table.Th style={{ width: "100px" }}>Actions</Table.Th>
               {/* เพิ่ม table header assignees ตรงนี้*/}
+              <Table.Th style={{ width: "200px" }} align="center">Assignees</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
